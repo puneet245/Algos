@@ -1,0 +1,66 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+/**
+ * @author puneet
+ *
+ */
+public class CanonicalPath {
+	
+	Stack<String> stack;
+	
+	public CanonicalPath() {
+		// TODO Auto-generated constructor stub
+		stack = new Stack<String>();
+	}
+	
+	void printCanonicalPath(){
+		
+		StringBuilder sb = new StringBuilder();
+	
+		for(String name :stack){
+			sb.append(name+"/");
+		}
+		
+		System.out.println(sb.toString());
+		
+	}
+	
+	void computeCanonicalPath(String input){
+		
+		String arr[] = input.split("/");
+		
+		for(String name:arr){
+			
+			switch(name){
+				case "..":
+					if( !stack.isEmpty() && stack.peek()!="..")
+						stack.pop();
+					else
+						stack.push(name);
+					
+					break;
+						
+				case ".":
+					break;
+					
+				default:
+					stack.push(name);
+			
+			}	
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		CanonicalPath cp = new CanonicalPath();
+		Scanner sc = new Scanner(System.in);
+		String input = sc.nextLine();
+		//String input = "e/../../a/d/./../b/c";
+		
+		cp.computeCanonicalPath(input);
+		cp.printCanonicalPath();
+	
+		sc.close();
+	}
+}
