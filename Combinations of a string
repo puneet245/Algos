@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+/**
+ * @author puneet
+ *
+ */
+public class Combination {
+	
+	static int count;
+	
+	void printCombinations( String input, StringBuilder out, int start, int length){
+		
+		for(int i=start;i<input.length();i++){
+			
+				out.append(input.charAt(i));
+				System.out.println( out.toString());
+				count++;
+				printCombinations(input,out,i+1,length);
+				out.setLength(out.length()-1);
+		}
+	}
+	
+	public static void main( String arg[]) {
+		Combination c = new Combination();
+		Scanner sc = new Scanner(System.in);
+		String input = sc.nextLine();
+		StringBuilder out = new StringBuilder();
+		c.printCombinations(input, out,0, input.length());
+		sc.close();
+		System.out.println("Total count of strings is "+ count);
+	}
+
+}
